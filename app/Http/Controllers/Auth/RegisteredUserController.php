@@ -42,12 +42,12 @@ class RegisteredUserController extends Controller
         }
 
         \App::setLocale($lang);
-        if(env('signup_button') == 'on'){
-            return view('auth.register', compact('lang'));
-        }else{
-            return abort('404', 'Page not found');
-        }
-        //return view('auth.register', compact('lang'));
+        // if(env('signup_button') == 'on'){
+        //     return view('auth.register', compact('lang'));
+        // }else{
+        //     return abort('404', 'Page not found');
+        // }
+        return view('auth.register', compact('lang'));
     }
 
     public function store(Request $request)
