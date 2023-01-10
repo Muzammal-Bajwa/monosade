@@ -54,176 +54,187 @@
               $SITE_RTL = env('SITE_RTL');
            }
       @endphp
-      <nav class="dash-sidebar light-sidebar {{(isset($cust_theme_bg) && $cust_theme_bg == 'on') ? 'transprent-bg':''}}">
-    <div class="navbar-wrapper">
-      <div class="m-header main-logo">
-        <a href="{{ route('home') }}" class="b-brand">
-          <!-- ========   change your logo hear   ============ -->
-           <img src="{{asset($logo.$company_logo)}}" alt="logo" class="sidebar_logo_size" />
-        </a>
-      </div>
-      <div class="navbar-content">
-        <ul class="dash-navbar">
-           @if(\Auth::guard('client')->check())
-              <li class="dash-item dash-hasmenu">
-                <a href="{{route('client.home')}}" class="dash-link {{ (Request::route()->getName() == 'home' || Request::route()->getName() == NULL || Request::route()->getName() == 'client.home') ? ' active' : '' }}">
-                  <span class="dash-micon"><i class="ti ti-home"></i></span>
-                  <span class="dash-mtext">{{ __('Dashboard') }}</span>
+       <!-- Menu -->
+
+       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                    <div class="app-brand demo">
+                        <a href="{{ route('home') }}" class="app-brand-link">
+                            <span class="app-brand-logo demo">
+                                <img src="{{asset('public/new_assets/assets/img/logo_main.png')}}" />
+                            </span>
+                            <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+                        </a>
+
+                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                        </a>
+                    </div>
+
+                    <div class="menu-inner-shadow"></div>
+
+                    <ul class="menu-inner py-1">
+                        <!-- Dashboard -->
+                        @if(\Auth::guard('client')->check())
+              <li class="menu-item">
+                <a href="{{route('client.home')}}" class="menu-link {{ (Request::route()->getName() == 'home' || Request::route()->getName() == NULL || Request::route()->getName() == 'client.home') ? ' active' : '' }}">
+                <img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Dashboard') }}</div>
                 </a>
               </li>
            @else
-             <li class="dash-item dash-hasmenu">
-                <a href="{{route('home')}}" class="dash-link  {{ (Request::route()->getName() == 'home' || Request::route()->getName() == NULL || Request::route()->getName() == 'client.home') ? ' active' : '' }}">
-                  <span class="dash-micon"><i class="ti ti-home"></i></span>
-                  <span class="dash-mtext">{{ __('Dashboard') }}</span>
+             <li class="menu-item">
+                <a href="{{route('home')}}" class="menu-link  {{ (Request::route()->getName() == 'home' || Request::route()->getName() == NULL || Request::route()->getName() == 'client.home') ? ' active' : '' }}">
+                <img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Dashboard') }}</div>
                 </a>
               </li>
             @endif
             @if(isset($currentWorkspace) && $currentWorkspace)
             @auth('web')  
-          <li class="dash-item dash-hasmenu">
-            <a href="{{ route('users.index',$currentWorkspace->slug) }}" class="dash-link {{ (Request::route()->getName() == 'users.index') ? ' active' : '' }}"><span class="dash-micon"> <i data-feather="user"></i></span><span
-                    class="dash-mtext">{{ __('Users') }}</span></a>
+          <li class="menu-item">
+            <a href="{{ route('users.index',$currentWorkspace->slug) }}" class="menu-link {{ (Request::route()->getName() == 'users.index') ? ' active' : '' }}"><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Users') }}</div></a>
           </li>
             @if($currentWorkspace->creater->id == Auth::user()->id)   
-            <li class="dash-item dash-hasmenu">
-                <a href="{{ route('clients.index',$currentWorkspace->slug) }}" class="dash-link {{ (Request::route()->getName() == 'clients.index') ? ' active' : '' }}"><span class="dash-micon"> <i class="ti ti-brand-python"></i></span><span
-                        class="dash-mtext"> {{ __('Clients') }}</span></a>
+            <li class="menu-item">
+                <a href="{{ route('clients.index',$currentWorkspace->slug) }}" class="menu-link {{ (Request::route()->getName() == 'clients.index') ? ' active' : '' }}"><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics"> {{ __('Clients') }}</div></a>
             </li>
             @endif  
-          <li class="dash-item {{ (Request::route()->getName() == 'projects.index' || Request::segment(2) == 'projects') ? ' active' : '' }}">
-            <a href="{{ route('projects.index',$currentWorkspace->slug) }}" class="dash-link"><span class="dash-micon"> <i data-feather="briefcase"></i></span><span
-                    class="dash-mtext">{{ __('Projects') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'projects.index' || Request::segment(2) == 'projects') ? ' active' : '' }}">
+            <a href="{{ route('projects.index',$currentWorkspace->slug) }}" class="menu-link"><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Projects') }}</div></a>
           </li>
-          <li class="dash-item {{ (Request::route()->getName() == 'tasks.index') ? ' active' : '' }}">
-            <a href="{{ route('tasks.index',$currentWorkspace->slug) }}" class="dash-link "><span class="dash-micon"><i data-feather="list"></i></span><span
-                    class="dash-mtext">{{ __('Tasks') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'tasks.index') ? ' active' : '' }}">
+            <a href="{{ route('tasks.index',$currentWorkspace->slug) }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Tasks') }}</div></a>
           </li>
 
-          <li class="dash-item {{ (Request::route()->getName() == 'timesheet.index') ? ' active' : '' }}">
-            <a href="{{route('timesheet.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="clock"></i></span><span
-                    class="dash-mtext">{{ __('Timesheet') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'timesheet.index') ? ' active' : '' }}">
+            <a href="{{route('timesheet.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Timesheet') }}</div></a>
           </li>
             @if(Auth::user()->type == 'user'&& $currentWorkspace->creater->id == Auth::user()->id)    
-          <li class="dash-item {{\Request::route()->getName() == 'time.tracker'?'active':''}}">
-            <a href="{{route('time.tracker',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="watch"></i></span><span
-                    class="dash-mtext">{{ __('Tracker') }}</span></a>
+          <li class="menu-item {{\Request::route()->getName() == 'time.tracker'?'active':''}}">
+            <a href="{{route('time.tracker',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Tracker') }}</div></a>
           </li>
            @endif  
           @if($currentWorkspace->creater->id == Auth::user()->id)
-          <li class="dash-item {{ (Request::route()->getName() == 'invoices.index' || Request::segment(2) == 'invoices') ? ' active' : '' }}">
-            <a href="{{ route('invoices.index',$currentWorkspace->slug) }}" class="dash-link"><span class="dash-micon"><i data-feather="printer"></i></span><span
-                    class="dash-mtext">{{ __('Invoices') }} </span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'invoices.index' || Request::segment(2) == 'invoices') ? ' active' : '' }}">
+            <a href="{{ route('invoices.index',$currentWorkspace->slug) }}" class="menu-link"><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Invoices') }} </div></a>
           </li>
          @endif
 
                     @if(isset($currentWorkspace) && $currentWorkspace && $currentWorkspace->creater->id == Auth::user()->id)
-                    <li class="dash-item dash-hasmenu {{ (Request::route()->getName() == 'contracts.index' || Request::route()->getName() == 'contracts.show') ? ' active' : '' }}">
-                        <a href="#" class="dash-link"
-                          ><span class="dash-micon"><i class="ti ti-device-floppy"></i></span
-                          ><span class="dash-mtext">{{__('Contracts')}}</span
+                    <li class="menu-item {{ (Request::route()->getName() == 'contracts.index' || Request::route()->getName() == 'contracts.show') ? ' active' : '' }}">
+                        <a href="#" class="menu-link"
+                          ><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+                               <div data-i18n="Analytics">{{__('Contracts')}}</div
                           ><span class="dash-arrow"><i data-feather="chevron-right"></i></span
                         ></a>
                         <ul class="dash-submenu collapse  {{ (Request::route()->getName() == 'contracts.index') ? ' active' : '' }}">
 
-                               <li class="dash-item {{ (Request::route()->getName() == 'contracts.index' || Request::route()->getName() == 'contracts.show') ? 'active' : '' }}">
-                                    <a class="dash-link" href="{{route('contracts.index',$currentWorkspace->slug)}}">{{__('Contracts')}}</a>
+                               <li class="menu-item {{ (Request::route()->getName() == 'contracts.index' || Request::route()->getName() == 'contracts.show') ? 'active' : '' }}">
+                                    <a class="menu-link" href="{{route('contracts.index',$currentWorkspace->slug)}}">{{__('Contracts')}}</a>
                                 </li>
                            
-                                <li class="dash-item ">
-                                    <a class="dash-link" href="{{route('contract_type.index',$currentWorkspace->slug)}}">{{__('Contract Type')}}</a>
+                                <li class="menu-item ">
+                                    <a class="menu-link" href="{{route('contract_type.index',$currentWorkspace->slug)}}">{{__('Contract Type')}}</a>
                                 </li>
                         </ul>
                     </li>
                     @endif
              
 
-          <li class="dash-item {{ (Request::route()->getName() == 'calender.index') ? ' active' : '' }}">
-            <a href="{{route('calender.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="calendar"></i></span><span
-                    class="dash-mtext">{{ __('Calendar') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'calender.index') ? ' active' : '' }}">
+            <a href="{{route('calender.index',$currentWorkspace->slug)}}" class="menu-link "> <img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Calendar') }}</div></a>
           </li>
-          <li class="dash-item {{ (Request::route()->getName() == 'notes.index') ? ' active' : '' }}">
-            <a href="{{route('notes.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="clipboard"></i></span><span
-                    class="dash-mtext">{{ __('Notes') }} </span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'notes.index') ? ' active' : '' }}">
+            <a href="{{route('notes.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Notes') }} </div></a>
           </li>
             @if(env('CHAT_MODULE') == 'on')
-          <li class="dash-item {{ (Request::route()->getName() == 'chats') ? ' active' : '' }}">
-            <a href="{{route('chats')}}" class="dash-link"><span class="dash-micon"><i class="ti ti-message-circle"></i></span><span
-                    class="dash-mtext">{{ __('Messenger') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'chats') ? ' active' : '' }}">
+            <a href="{{route('chats')}}" class="menu-link"><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Messenger') }}</div></a>
           
           </li>
             @endif
-            <li class="dash-item {{ (Request::route()->getName() == 'project_report.index' || Request::segment(2) == 'project_report') ? ' active' : '' }}">
-            <a href="{{ route('project_report.index',$currentWorkspace->slug) }}" class="dash-link "><span class="dash-micon"><i class="ti ti-chart-line"></i></span><span
-                class="dash-mtext">{{ __('Project Report') }}</span></a>
+            <li class="menu-item {{ (Request::route()->getName() == 'project_report.index' || Request::segment(2) == 'project_report') ? ' active' : '' }}">
+            <a href="{{ route('project_report.index',$currentWorkspace->slug) }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Project Report') }}</div></a>
           </li>
-            <li class="dash-item {{ (Request::route()->getName() == 'zoom-meeting.index') ? ' active' : '' }}">
-            <a href="{{route('zoom-meeting.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="video"></i></span><span
-                class="dash-mtext">{{ __('Zoom Meeting') }}</span></a>
+            <li class="menu-item {{ (Request::route()->getName() == 'zoom-meeting.index') ? ' active' : '' }}">
+            <a href="{{route('zoom-meeting.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Zoom Meeting') }}</div></a>
       
           </li>
         @elseauth
-            <li class="dash-item {{ (Request::route()->getName() == 'client.projects.index' || Request::segment(3) == 'projects') ? ' active' : '' }}">
-            <a href="{{ route('client.projects.index',$currentWorkspace->slug) }}" class="dash-link "><span class="dash-micon"><i data-feather="briefcase"></i></span><span
-                class="dash-mtext">{{ __('Projects') }}</span></a>
+            <li class="menu-item {{ (Request::route()->getName() == 'client.projects.index' || Request::segment(3) == 'projects') ? ' active' : '' }}">
+            <a href="{{ route('client.projects.index',$currentWorkspace->slug) }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Projects') }}</div></a>
           </li>
 
-            <li class="dash-item {{ (Request::route()->getName() == 'client.timesheet.index') ? ' active' : '' }}">
-            <a href="{{route('client.timesheet.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="clock"></i></span><span
-                class="dash-mtext">{{ __('Timesheet') }}</span></a>
+            <li class="menu-item {{ (Request::route()->getName() == 'client.timesheet.index') ? ' active' : '' }}">
+            <a href="{{route('client.timesheet.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Timesheet') }}</div></a>
           </li>
 
-          <li class="dash-item {{ (Request::route()->getName() == 'client.invoices.index') ? ' active' : '' }}">
-            <a href="{{ route('client.invoices.index',$currentWorkspace->slug) }}" class="dash-link "><span class="dash-micon"><i data-feather="printer"></i></span><span
-                class="dash-mtext">{{ __('Invoices') }} </span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'client.invoices.index') ? ' active' : '' }}">
+            <a href="{{ route('client.invoices.index',$currentWorkspace->slug) }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Invoices') }} </div></a>
           </li>
 
-            <li class="dash-item {{ (Request::route()->getName() == 'client.project_report.index' || Request::segment(3) == 'project_report') ? ' active' : '' }}">
-            <a href="{{ route('client.project_report.index',$currentWorkspace->slug) }}" class="dash-link "><span class="dash-micon"><i class="ti ti-chart-line"></i></span><span
-                class="dash-mtext">{{ __('Project Report') }}</span></a>
-          </li>
-
-
-           <li class="dash-item {{ (Request::route()->getName() == 'client.contracts.index' || Request::route()->getName() == 'client.contracts.show') ? 'active' : '' }}">
-            <a href="{{route('client.contracts.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i class="ti ti-device-floppy"></i></span><span
-                class="dash-mtext">{{ __('Contracts') }}</span></a>
+            <li class="menu-item {{ (Request::route()->getName() == 'client.project_report.index' || Request::segment(3) == 'project_report') ? ' active' : '' }}">
+            <a href="{{ route('client.project_report.index',$currentWorkspace->slug) }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Project Report') }}</div></a>
           </li>
 
 
-          <li class="dash-item {{ (Request::route()->getName() == 'client.calender.index') ? ' active' : '' }}">
-            <a href="{{route('client.calender.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="calendar"></i></span><span
-                class="dash-mtext">{{ __('Calendar') }}</span></a>
+           <li class="menu-item {{ (Request::route()->getName() == 'client.contracts.index' || Request::route()->getName() == 'client.contracts.show') ? 'active' : '' }}">
+            <a href="{{route('client.contracts.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Contracts') }}</div></a>
           </li>
 
-          <li class="dash-item {{ (Request::route()->getName() == 'client.zoom-meeting.index') ? ' active' : '' }}">
-            <a href="{{route('client.zoom-meeting.index',$currentWorkspace->slug)}}" class="dash-link "><span class="dash-micon"><i data-feather="video"></i></span><span
-                    class="dash-mtext">{{ __('Zoom Meeting') }}</span></a>
+
+          <li class="menu-item {{ (Request::route()->getName() == 'client.calender.index') ? ' active' : '' }}">
+            <a href="{{route('client.calender.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Calendar') }}</div></a>
+          </li>
+
+          <li class="menu-item {{ (Request::route()->getName() == 'client.zoom-meeting.index') ? ' active' : '' }}">
+            <a href="{{route('client.zoom-meeting.index',$currentWorkspace->slug)}}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Zoom Meeting') }}</div></a>
       
           </li>
            @endauth
                 @endif
 
            @if(Auth::user()->type == 'admin')       
-             <li class="dash-item {{ (Request::route()->getName() == 'users.index') ? ' active' : '' }}">
-            <a href="{{ route('users.index','') }}" class="dash-link "><span class="dash-micon"> <i data-feather="user"></i></span><span
-                class="dash-mtext">{{ __('Users') }}</span></a>
+             <li class="menu-item {{ (Request::route()->getName() == 'users.index') ? ' active' : '' }}">
+            <a href="{{ route('users.index','') }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Users') }}</div></a>
             </li>    
           @endif
             @if((Auth::user()->type == 'admin' || (isset($currentWorkspace) && $currentWorkspace && $currentWorkspace->creater->id == Auth::user()->id)) && Auth::user()->getGuard() != 'client')
              
-            <li class="dash-item {{ (Request::route()->getName() == 'plans.index') ? ' active' : '' }}">
-            <a href="{{ route('plans.index') }}" class="dash-link "><span class="dash-micon"> <i class="ti ti-trophy"></i></span><span
-                class="dash-mtext">{{ __('Plans') }}</span></a>
+            <li class="menu-item {{ (Request::route()->getName() == 'plans.index') ? ' active' : '' }}">
+            <a href="{{ route('plans.index') }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Plans') }}</div></a>
             </li>
 
 
-          <li class="dash-item {{ (Request::route()->getName() == 'order.index') ? ' active' : '' }}">
-            <a href="{{ route('order.index') }}" class="dash-link "><span class="dash-micon"><i data-feather="credit-card"></i></span><span class="dash-mtext">{{ __('Orders') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'order.index') ? ' active' : '' }}">
+            <a href="{{ route('order.index') }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Orders') }}</div></a>
           </li>
           @if(Auth::user()->type == 'admin')
-          <li class="dash-item {{ request()->is('plan_request*') ? 'active' : '' }}">
-            <a href="{{ route('plan_request.index') }}" class="dash-link "><span class="dash-micon"><i class="ti ti-brand-telegram"></i></span><span
-                    class="dash-mtext">{{__('Plan Request')}}</span></a>
+          <li class="menu-item {{ request()->is('plan_request*') ? 'active' : '' }}">
+            <a href="{{ route('plan_request.index') }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{__('Plan Request')}}</div></a>
           
           </li>
             @endif
@@ -233,35 +244,36 @@
 
          @if(Auth::user()->type == 'admin')
 
-           <li class="dash-item {{ (Request::route()->getName() == 'coupons.index' || Request::segment(1) == 'coupons') ? ' active' : '' }}">
-            <a href="{{ route('coupons.index') }}" class="dash-link "><span class="dash-micon"> <i class="ti ti-tag"></i></span><span
-                class="dash-mtext">{{ __('Coupons') }}</span></a>
+           <li class="menu-item {{ (Request::route()->getName() == 'coupons.index' || Request::segment(1) == 'coupons') ? ' active' : '' }}">
+            <a href="{{ route('coupons.index') }}" class="menu-link ">
+            <img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">>{{ __('Coupons') }}</div></a>
           </li>
 
-          <li class="dash-item {{ (Request::route()->getName() == 'lang_workspace') ? ' active' : '' }}">
-            <a href="{{ route('lang_workspace') }}" class="dash-link "><span class="dash-micon"><i class="ti ti-world nocolor"></i></span><span
-                class="dash-mtext">{{ __('Languages') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'lang_workspace') ? ' active' : '' }}">
+            <a href="{{ route('lang_workspace') }}" class="menu-link ">
+            <img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">>{{ __('Languages') }}</div></a>
           </li>
-            <li class="dash-item {{(Request::route()->getName() == 'email_template*' || Request::segment(1) == 'email_template_lang') ? ' active' : '' }}">
-                <a class="dash-link" href="{{route('email_template.index')}}">
-                    <span class="dash-micon"><i class="ti ti-mail"></i></span><span class="dash-mtext">{{__('Email Templates')}}</span>
+            <li class="menu-item {{(Request::route()->getName() == 'email_template*' || Request::segment(1) == 'email_template_lang') ? ' active' : '' }}">
+                <a class="menu-link" href="{{route('email_template.index')}}">
+                <img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">>{{ __('Email Templates') }}</div>
                 </a>
             </li>
-           <li class="dash-item {{ (Request::route()->getName() == 'settings.index') ? ' active' : '' }}">
-              <a href="{{ route('settings.index') }}" class="dash-link "><span class="dash-micon"><i data-feather="settings"></i></span><span
-                  class="dash-mtext"> {{ __('Settings') }}</span></a>
+           <li class="menu-item {{ (Request::route()->getName() == 'settings.index') ? ' active' : '' }}">
+              <a href="{{ route('settings.index') }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics"> {{ __('Settings') }}</div></a>
             </li>
 
          @endif
          @if(isset($currentWorkspace) && $currentWorkspace && $currentWorkspace->creater->id == Auth::user()->id && Auth::user()->getGuard() != 'client')
 
-          <li class="dash-item {{ (Request::route()->getName() == 'workspace.settings') ? ' active' : '' }}">
-            <a href="{{ route('workspace.settings',$currentWorkspace->slug) }}" class="dash-link "><span class="dash-micon"><i data-feather="settings"></i></span><span
-                    class="dash-mtext">{{ __('Settings') }}</span></a>
+          <li class="menu-item {{ (Request::route()->getName() == 'workspace.settings') ? ' active' : '' }}">
+            <a href="{{ route('workspace.settings',$currentWorkspace->slug) }}" class="menu-link "><img class="menu-icon tf-icons" src="{{asset('public/new_assets/assets/img/icons/linear/message.svg')}}" />
+            <div data-i18n="Analytics">{{ __('Settings') }}</div></a>
           </li>
          @endif
-        
-
-      </div>
-    </div>
-  </nav>
+                    </ul>
+                </aside>
+                <!-- / Menu -->

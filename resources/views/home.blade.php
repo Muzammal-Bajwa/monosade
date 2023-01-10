@@ -6,306 +6,269 @@
 
 @section('content')
 
-    <section class="section">
-        @if (Auth::user()->type == 'admin')
-            <div class="row">
-                <div class="col-12">
-                    @if (empty(env('PUSHER_APP_ID')) || empty(env('PUSHER_APP_KEY')) || empty(env('PUSHER_APP_SECRET')) || empty(env('PUSHER_APP_CLUSTER')))
-                        <div class="alert alert-warning"><i class="fas fa-warning"></i>
-                            {{ __('Please Add Pusher Detail in Setting Page ') }}<u><a
-                                    href="{{ route('settings.index') }}">{{ __('here') }}</a></u></div>
-                    @endif
-                    @if (empty(env('MAIL_DRIVER')) || empty(env('MAIL_HOST')) || empty(env('MAIL_PORT')) || empty(env('MAIL_USERNAME')) || empty(env('MAIL_PASSWORD')) || empty(env('MAIL_PASSWORD')))
-                        <div class="alert alert-warning"><i class="fas fa-warning"></i>
-                            {{ __('Please Add Mail Details in Setting Page ') }} <u><a
-                                    href="{{ route('settings.index') }}">{{ __('here') }}</a></u></div>
-                    @endif
-                </div>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                    <div class="row">
 
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="theme-avtar bg-info">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <p class="text-muted text-sm mt-4 mb-2">
-                                       {{ __('Paid User') }} : <strong>{{ $totalPaidUsers }}</strong></p>
-                                    <h6 class="mb-3">{{ __('Total Users') }}</h6>
-                                    <h3 class="mb-0">{{ $totalUsers }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
+<!-- Content wrapper -->
+<div class="content-wrapper">
+                        <!-- Content -->
 
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="theme-avtar bg-success">
-                                        <i class="fas fa-cash-register"></i>
-                                    </div>
-                                    <p class="text-muted text-sm mt-4 mb-2">
-
-                                        {{ __('Order Amount') }} : <strong>{{ (env('CURRENCY_SYMBOL') != '' ? env('CURRENCY_SYMBOL') : '$') . $totalOrderAmount }}</strong></p>
-                                    <h6 class="mb-3">{{ __('Total Orders') }}</h6>
-                                    <h3 class="mb-0">{{ $totalOrders }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card">
-                                <div class="card-body total_plan">
-                                    <div class="theme-avtar bg-danger">
-                                        <i class="fas fa-trophy"></i>
-                                    </div>
-                                    <p class="text-muted text-sm mt-4 mb-2">
-                                        {{ __('Most purchase plan') }} : <strong> @if ($mostPlans)
-                                            {{ $mostPlans->name }}
-                                        @else
-                                            -
-                                        @endif</strong>
-                                    </p>
-                                    <h6 class="mb-3">{{ __('Total Plans') }}</h6>
-                                    <h3 class="mb-0">{{ $totalPlans }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-10">
-                                    <h5>{{ __('Recent Orders') }}</h5>
-                                </div>
-                                <div class=" col-2"><small class="text-end"></small></div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div id="task-area-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @elseif($currentWorkspace)
-            <div class="row">
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                    <div class="row mt-3">
-                        <div class="col-xl-3 col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="theme-avtar bg-primary">
-                                        <i class="fas fa-tasks bg-primary text-white"></i>
-                                    </div>
-                                    <p class="text-muted text-sm"></p>
-                                    <h6 class="">{{ __('Total Project') }}</h6>
-                                    <h3 class="mb-0">{{ $totalProject }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="theme-avtar bg-info">
-                                        <i class="fas fa-tag bg-info text-white"></i>
-                                    </div>
-                                    <p class="text-muted text-sm "></p>
-                                    <h6 class="">{{ __('Total Task') }}</h6>
-                                    <h3 class="mb-0">{{ $totalTask }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="theme-avtar bg-danger">
-                                        <i class="fas fa-bug bg-danger text-white"></i>
-                                    </div>
-                                    <p class="text-muted text-sm"></p>
-                                    <h6 class="">{{ __('Total Bug') }}</h6>
-                                    <h3 class="mb-0">{{ $totalBugs }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="theme-avtar bg-success">
-                                        <i class="fas fa-users bg-success text-white"></i>
-                                    </div>
-                                    <p class="text-muted text-sm"></p>
-                                    <h6 class="">{{ __('Total User') }}</h6>
-                                    <h3 class="mb-0">{{ $totalMembers }} <span
-                                            class="text-success text-sm"></span></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card ">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-9">
-                                    <h5 class="">
-                                        {{ __('Tasks') }}
-                                    </h5>
-                                </div>
-                                <div class="col-auto d-flex justify-content-end">
-                                    <div class="">
-                                        <small><b>{{ $completeTask }}</b> {{ __('Tasks completed out of') }}
-                                            {{ $totalTask }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body ">
-                            <div class="table-responsive">
-                                <table class="table table-centered table-hover mb-0 animated">
-                                    <tbody>
-                                        @foreach ($tasks as $task)
-                                            <tr>
-                                                <td>
-                                                    <div class="font-14 my-1"><a
-                                                            href="{{ route('projects.task.board', [$currentWorkspace->slug, $task->project_id]) }}"
-                                                            class="text-body">{{ $task->title }}</a></div>
-
-                                                    @php($due_date = '<span class="text-' . ($task->due_date < date('Y-m-d') ? 'danger' : 'success') . '">' . date('Y-m-d', strtotime($task->due_date)) . '</span> ')
-
-                                                    <span class="text-muted font-13">{{ __('Due Date') }} :
-                                                        {!! $due_date !!}</span>
-                                                </td>
-                                                <td>
-                                                    <span class="text-muted font-13">{{ __('Status') }}</span> <br />
-                                                    @if ($task->complete == '1')
-                                                        <span
-                                                            class="status_badge_dash badge bg-success p-2 px-3 rounded">{{ __($task->status) }}</span>
-                                                    @else
-                                                        <span
-                                                            class="status_badge_dash badge bg-primary p-2 px-3 rounded">{{ __($task->status) }}</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <span class="text-muted font-13">{{ __('Project') }}</span>
-                                                    <div class="font-14 mt-1 font-weight-normal">
-                                                        {{ $task->project->name }}</div>
-                                                </td>
-                                                @if ($currentWorkspace->permission == 'Owner' || Auth::user()->getGuard() == 'client')
-                                                    <td>
-                                                        <span class="text-muted font-13">{{ __('Assigned to') }}</span>
-                                                        <div class="font-14 mt-1 font-weight-normal">
-                                                            @foreach ($task->users() as $user)
-                                                                <span
-                                                                    class="badge p-2 px-2 rounded bg-secondary">{{ isset($user->name) ? $user->name : '-' }}</span>
-                                                            @endforeach
-                                                        </div>
-                                                    </td>
-                                                @endif
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-                <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>{{ __('Tasks Overview') }}</h5>
-                            <div class="text-end"><small class=""></small></div>
-                        </div>
-                        <div class="card-body">
-                            <div id="task-area-chart"></div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="float-end">
-                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Refferals"><i
-                                        class=""></i></a>
-                            </div>
-                           
-                            <h5>{{ __('Project Status') }}</h5>
-                        </div>
-                        <div class="card-body">
+                        <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="row align-items-center">
-                                <div class="col-6">
-                                    <div id="projects-chart"></div>
+                                <div class="col-lg-4 col-md-4 order-0">
+                                    <div class="mini_content">
+                                        <h1>
+                                            Good morning,<br />
+                                            <span>Martina M</span>
+                                        </h1>
+                                        <p>
+                                            Here you can track your activity and<br />
+                                            projects.
+                                        </p>
+                                        <a href="#"><i class="bx bx-plus fs-4 lh-0"></i> New Project</a>
+                                    </div>
                                 </div>
-                                <div class="col-6 pb-5 px-3">
-
-                                    <div class="col-6">
-                                        <span class="d-flex align-items-center mb-2">
-                                            <i class="f-10 lh-1 fas fa-circle" style="color:#545454;"></i>
-                                            <span class="ms-2 text-sm">On Going</span>
-                                        </span>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="d-flex align-items-center mb-2">
-                                            <i class="f-10 lh-1 fas fa-circle" style="color: #3cb8d9;"></i>
-                                            <span class="ms-2 text-sm">On Hold</span>
-                                        </span>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="d-flex align-items-center mb-2">
-                                            <i class="f-10 lh-1 fas fa-circle" style="color: #6095c1; "></i>
-                                            <span class="ms-2 text-sm">Finished</span>
-                                        </span>
-                                    </div>
-
-                                </div>
-
-                                <div class="row text-center">
-                                    
-                                    @foreach ($arrProcessPer as $index => $value)
-                                        <div class="col-4">
-                                            <i class="fas fa-chart {{ $arrProcessClass[$index] }}  h3"></i>
-                                            <h6 class="font-weight-bold">
-                                                <span>{{ $value }}%</span>
-                                            </h6>
-                                            <p class="text-muted">{{ __($arrProcessLabel[$index]) }}</p>
+                                <div class="col-lg-8 mb-4 order-1">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-4 mb-4">
+                                            <div class="status_card">
+                                                <span>Active Projects</span>
+                                                <h2>05</h2>
+                                                <img src="{{asset('public/new_assets/assets/img/Eye.png')}}" alt="" />
+                                            </div>
                                         </div>
-                                    @endforeach
-
+                                        <div class="col-lg-4 col-md-12 col-4 mb-4">
+                                            <div class="status_card">
+                                                <span>Completed Projects</span>
+                                                <h2>100</h2>
+                                                <img src="{{asset('public/new_assets/assets/img/IdentificationBadge.png')}}" alt="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-4 mb-4">
+                                            <div class="status_card">
+                                                <span>Team members</span>
+                                                <h2>3</h2>
+                                                <img src="{{asset('public/new_assets/assets/img/UserRectangle.png')}}" alt="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="card table_card">
+                                        <h5 class="card-header">Recent projects <a href="#">View all</a></h5>
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Project</th>
+                                                        <th>Client</th>
+                                                        <th>Category</th>
+                                                        <th>Status</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+                                                    <tr>
+                                                        <td><img src="{{asset('public/new_assets/assets/img/avatars/5.png')}}" alt="" class="project-circle" /> Real estate Logo Design</td>
+                                                        <td>Albert Cook</td>
+                                                        <td>
+                                                            Logo Design
+                                                        </td>
+                                                        <td><span class="badge bg-label-primary me-1">In-progress</span></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="{{asset('public/new_assets/assets/img/avatars/5.png')}}" alt="" class="project-circle" /> Real estate Logo Design</td>
+                                                        <td>Albert Cook</td>
+                                                        <td>
+                                                            Logo Design
+                                                        </td>
+                                                        <td><span class="badge bg-label-primary me-1">In-progress</span></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="{{asset('public/new_assets/assets/img/avatars/5.png')}}" alt="" class="project-circle" /> Real estate Logo Design</td>
+                                                        <td>Albert Cook</td>
+                                                        <td>
+                                                            Logo Design
+                                                        </td>
+                                                        <td><span class="badge bg-label-primary me-1">In-progress</span></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="{{asset('public/new_assets/assets/img/avatars/5.png')}}" alt="" class="project-circle" /> Real estate Logo Design</td>
+                                                        <td>Albert Cook</td>
+                                                        <td>
+                                                            Logo Design
+                                                        </td>
+                                                        <td><span class="badge bg-label-primary me-1">In-progress</span></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="{{asset('public/new_assets/assets/img/avatars/5.png')}}" alt="" class="project-circle" /> Real estate Logo Design</td>
+                                                        <td>Albert Cook</td>
+                                                        <td>
+                                                            Logo Design
+                                                        </td>
+                                                        <td><span class="badge bg-label-primary me-1">In-progress</span></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="{{asset('public/new_assets/assets/img/avatars/5.png')}}" alt="" class="project-circle" /> Real estate Logo Design</td>
+                                                        <td>Albert Cook</td>
+                                                        <td>
+                                                            Logo Design
+                                                        </td>
+                                                        <td><span class="badge bg-label-primary me-1">In-progress</span></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="d_inspo">
+                                        <h5>Design Inspiration</h5>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-12 col-3 mb-3">
+                                                <a href="#">
+                                                    <div class="card h-100">
+                                                        <div class="card-img-top">
+                                                            <button><i class="bx bx-heart"></i></button>
+                                                            <span><img src="{{asset('public/new_assets/assets/img/d_inspo_1.png')}}" alt="Card image cap" /></span>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Title of the post</h5>
+                                                            <p class="card-text">
+                                                                Logo Design
+                                                            </p>
+                                                            Start new project
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12 col-3 mb-3">
+                                                <a href="#">
+                                                    <div class="card h-100">
+                                                        <div class="card-img-top">
+                                                            <button><i class="bx bx-heart"></i></button>
+                                                            <span><img src="{{asset('public/new_assets/assets/img/d_inspo_1.png')}}" alt="Card image cap" /></span>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Title of the post</h5>
+                                                            <p class="card-text">
+                                                                Logo Design
+                                                            </p>
+                                                            Start new project
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12 col-3 mb-3">
+                                                <a href="#">
+                                                    <div class="card h-100">
+                                                        <div class="card-img-top">
+                                                            <button><i class="bx bx-heart"></i></button>
+                                                            <span> <img src="{{asset('public/new_assets/assets/img/d_inspo_1.png')}}" alt="Card image cap" /></span>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Title of the post</h5>
+                                                            <p class="card-text">
+                                                                Logo Design
+                                                            </p>
+                                                            Start new project
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-3 col-md-12 col-3 mb-3">
+                                                <a href="#">
+                                                    <div class="card h-100">
+                                                        <div class="card-img-top">
+                                                            <button><i class="bx bx-heart"></i></button>
+                                                            <span><img src="{{asset('public/new_assets/assets/img/d_inspo_1.png')}}" alt="Card image cap" /></span>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Title of the post</h5>
+                                                            <p class="card-text">
+                                                                Logo Design
+                                                            </p>
+                                                            Start new project
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        @else
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-0 mt-3 text-center text-white bg-info">
-                        <div class="card-body">
-                            <h5 class="card-title mb-0">
-                                {{ __('There is no active Workspace. Please create Workspace from right side menu.') }}
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-    </section>
+                        <!-- / Content -->
 
+                        
+
+                        <div class="content-backdrop fade"></div>
+                    </div>
+                    <!-- Content wrapper -->
 @endsection
 
 

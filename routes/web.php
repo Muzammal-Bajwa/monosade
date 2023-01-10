@@ -89,6 +89,7 @@ Route::prefix('client')->as('client.')->group(function() {
 
     // project
     Route::get('/{slug}/projects',[ProjectController::class, 'index'])->name('projects.index')->middleware(['auth:client','XSS']);
+    Route::get('/{slug}/projects/create',[ProjectController::class, 'create_project'])->name('projects.create')->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/{id}',[ProjectController::class, 'show'])->name('projects.show')->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/milestone/{id}',[ProjectController::class, 'milestone'])->name('projects.milestone')->middleware(['auth:client','XSS']);
     Route::post('/{slug}/projects/milestone/{id}/store',[ProjectController::class, 'milestoneStore'])->name('projects.milestone.store')->middleware(['auth:client','XSS']);

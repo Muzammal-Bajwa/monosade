@@ -58,6 +58,18 @@ class ProjectController extends Controller
 
         return view('projects.index', compact('currentWorkspace', 'projects'));
     }
+    public function create_project($slug)
+    {
+        $objUser = Auth::user();
+        $currentWorkspace = Utility::getWorkspaceBySlug($slug);
+        if ($objUser->getGuard() == 'client') {
+            $projects = Project::select('projects.*')->join('client_projects', 'projects.id', '=', 'client_projects.project_id')->where('client_projects.client_id', '=', $objUser->id)->where('projects.workspace', '=', $currentWorkspace->id)->get();
+        } else {
+            $projects = Project::select('projects.*')->join('user_projects', 'projects.id', '=', 'user_projects.project_id')->where('user_projects.user_id', '=', $objUser->id)->where('projects.workspace', '=', $currentWorkspace->id)->get();
+        }
+
+        return view('projects.create_project', compact('currentWorkspace', 'projects'));
+    }
 
       public function tracker($slug,$id)
     {
