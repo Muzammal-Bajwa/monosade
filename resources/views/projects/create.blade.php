@@ -72,10 +72,11 @@
                 <div class="row">
                     <div class="col-12 col-lg-12">
                         <div class="white_card">
-                            <form action="#">
+                        <form class="" method="post" action="{{ route('projects.store',$currentWorkspace->slug) }}">
+                            @csrf
                                 <div class="form-group">
                                     <label for="#">Project title</label>
-                                    <input type="text" placeholder="E.g.  eCommerce app design"/>
+                                    <input type="text" name="name" placeholder="E.g.  eCommerce app design"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="#">Design category</label>
@@ -140,8 +141,7 @@
                                 </div>
                                 <div class="form-group space_up">
                                     <label for="#">Description</label>
-                                    <p>Format your paragraphs and create checklist to make your description easy to read and follow. Well written
-                                        instruction = better designs.</p>
+                                    <textarea class="form-control" id="description" name="description" required="" placeholder="{{ __('Add Description') }}"></textarea>
                                     <div class="app">
                                     </div>
                                 </div>
@@ -156,6 +156,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                <input type="submit" value="{{ __('Add New project')}}" class="btn  btn-primary">
+                            </div>
                             </form>
                         </div>
                     </div>

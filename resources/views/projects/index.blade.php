@@ -85,7 +85,7 @@
                               <a class="dropdown-item" href="javascript:void(0);"
                                 ><i class="bx bx-edit-alt me-1"></i> Repeat Order</a
                               >
-                             <a href="#" class="dropdown-item text-danger bs-pass-para" data-confirm="{{__('Are You Sure?')}}" data-text="{{__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="leave-form-{{$project->id}}">
+                             <a href="javascript:void(0)" class="dropdown-item text-danger bs-pass-para" data-confirm="{{__('Are You Sure?')}}" data-text="{{__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="leave-form-{{$project->id}}">
                                 <i class="bx bx-trash me-1"></i> Delete Project</a>
                               <form id="leave-form-{{$project->id}}" action="{{ route('projects.leave',[$currentWorkspace->slug,$project->id]) }}" method="POST" style="display: none;">
                                 @csrf
