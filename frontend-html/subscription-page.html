@@ -36,7 +36,6 @@
         <link rel="stylesheet" href="https://unpkg.com/react-quill@1.0.0/dist/quill.core.css">
         <link rel="stylesheet" href="https://unpkg.com/react-quill@1.0.0/dist/quill.snow.css">
         <link rel="stylesheet" href="https://unpkg.com/react-quill@1.0.0/dist/quill.bubble.css">
-        
 
         <!-- Page CSS -->
 
@@ -48,9 +47,9 @@
         <script src="assets/js/config.js"></script>
     </head>
 
-    <body>
+    <body class="white_bg">
         
-        <section id="header">
+        <section id="header" class="subscription">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-6">
@@ -60,139 +59,159 @@
                         <a href="#" class="logout">mansuri.jafar7@gmail.com - Logout</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-lg-12">
-                        <h2>Create a new project</h2>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <section id="createProject">
+        <section id="subContent">
             <div class="container">
                 <div class="row">
+                    <div class="col-12 col-lg-12 text-center">
+                        <h1>We’ve got a pricing plan<br/>
+                            <span>that’s perfect you</span></h1>
+                        <p>Cost-Effective, Full Services, High Security</p>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12 col-lg-12">
-                        <div class="white_card">
-                            <form action="#">
-                                <div class="form-group">
-                                    <label for="#">Project title</label>
-                                    <input type="text" placeholder="E.g.  eCommerce app design"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="#">Design category</label>
-                                    <input type="text" id="input1" class="form-control" placeholder="Search your category">
-                                    <div id="list1" class="list-group hide">
-                                        <a href="#" class="list-group-item">
-                                            <img src="assets/img/document-photo-24px.png" alt=""> Logo Design
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <img src="assets/img/document-photo-24px.png" alt=""> Social Media Design
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <img src="assets/img/document-photo-24px.png" alt=""> Poster Design
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <img src="assets/img/document-photo-24px.png" alt=""> Banner Design
-                                        </a>
-                                        <a href="#" class="list-group-item">
-                                            <img src="assets/img/document-photo-24px.png" alt=""> Landing Page Design
-                                        </a>
-                                    </div>
-                                    <!-- <input type="text" placeholder="Search your category"/> -->
-                                    <ul class="tags">
-                                        <li><img src="assets/img/tick_green.png" alt="">Social media posts</li>
-                                        <li><img src="assets/img/tick_green.png" alt="">Social media posts</li>
-                                        <li><img src="assets/img/tick_green.png" alt="">Social media posts</li>
-                                    </ul>
-                                </div>
-                                <div class="form-group">
-                                    <label for="#">Dimensions</label>
-                                    <p>Social media posts</p>
-                                    <div class="item_cards">
-                                        <a href="#">
-                                            <div class="item">
-                                                <span><img src="assets/img/uit_facebook-f.png" alt=""></span>
-                                                <h6>Facebook post</h6>
-                                                <p>1080 X 1080</p>
+                        <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">MONTHLY</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">YEARLY</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                                <div class="pricing_table">
+                                    <div class="row row-eq-height">
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table">
+                                                <h2>Free</h2>
+                                                <h6>Basic</h6>
+                                                <p>Unleash the power of <br/>automation.</p>
+                                                <ul>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                </ul>
+                                                <a href="#">Choose plan</a>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="item">
-                                                <span><img src="assets/img/uit_facebook-f.png" alt=""></span>
-                                                <h6>Facebook story</h6>
-                                                <p>1080 X 1080</p>
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table">
+                                                <h2>₹299<span>/month</span></h2>
+                                                <h6>Professional</h6>
+                                                <p>Advanced tools to take your <br/>work to the next level.</p>
+                                                <ul>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                </ul>
+                                                <a href="#">Choose plan</a>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="item">
-                                                <span><img src="assets/img/instagram.png" alt=""></span>
-                                                <h6>Instagram post</h6>
-                                                <p>1080 X 1080</p>
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table most_pop">
+                                                <div class="upper">
+                                                    <div class="tag">MOST POPULAR</div>
+                                                    <h2>₹499<span>/month</span></h2>
+                                                    <h6>Company</h6>
+                                                    <p>Automation plus enterprise- <br/>grade features.</p>
+                                                    <ul>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                    </ul>
+                                                    <a href="#">Choose plan</a>
+                                                </div>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="item">
-                                                <span><img src="assets/img/instagram.png" alt=""></span>
-                                                <h6>Instagram story</h6>
-                                                <p>1080 X 1080</p>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="item">
-                                                <span><img src="assets/img/custom.png" alt=""></span>
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table">
+                                                <h2>₹199<span>/month</span></h2>
                                                 <h6>Custom</h6>
-                                                <p>1080 X 1080</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="form-group space_up">
-                                    <label for="#">How many post you want to make?</label>
-                                    <div class='ctrl'>
-                                        <div class='ctrl__button ctrl__button--decrement'>&ndash;</div>
-                                            <div class='ctrl__counter'>
-                                                <input class='ctrl__counter-input' maxlength='10' type='text' value='0'>
-                                                <div class='ctrl__counter-num'>0</div>
-                                            </div>
-                                        <div class='ctrl__button ctrl__button--increment'>+</div>
-                                    </div>                                      
-                                </div>
-                                <div class="form-group space_up">
-                                    <label for="#">Description</label>
-                                    <p>Format your paragraphs and create checklist to make your description easy to read and follow. Well written
-                                        instruction = better designs.</p>
-                                    <div class="app">
-                                    </div>
-                                </div>
-                                <div class="form-group space_up">
-                                    <label for="#">Attachments</label>
-                                    <div class="attech">
-                                        <div class="attech_header">
-                                            <input type="file" class="custom-file-input">
-                                            <p>Upload or drag & drop any images, files, or examples that may be helpful<br/>
-                                                explaining your project here.</p>
-                                        </div>
-                                        <div class="attech_body">
-                                            <div class="file_item">
-                                                <span><img src="assets/img/upload_placeholder.png"/> demo_image.png</span>
-                                                <a href="#">Remove</a>
-                                            </div>
-                                            <div class="file_item">
-                                                <span><img src="assets/img/upload_placeholder.png"/> demo_image.png</span>
-                                                <a href="#">Remove</a>
-                                            </div>
-                                            <div class="file_item">
-                                                <span><img src="assets/img/upload_placeholder.png"/> demo_image.png</span>
-                                                <a href="#">Remove</a>
+                                                <p>Unleash the power of <br/>automation.</p>
+                                                <ul>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                </ul>
+                                                <a href="#">Choose plan</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="action">
-                                    <a href="#">Skip</a>
-                                    <button type="button">Next</button>
+                            </div>
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                                <div class="pricing_table">
+                                    <div class="row row-eq-height">
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table">
+                                                <h2>Free</h2>
+                                                <h6>Basic</h6>
+                                                <p>Unleash the power of <br/>automation.</p>
+                                                <ul>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                </ul>
+                                                <a href="#">Choose plan</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table">
+                                                <h2>₹299<span>/year</span></h2>
+                                                <h6>Professional</h6>
+                                                <p>Advanced tools to take your <br/>work to the next level.</p>
+                                                <ul>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                </ul>
+                                                <a href="#">Choose plan</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table most_pop">
+                                                <div class="upper">
+                                                    <div class="tag">MOST POPULAR</div>
+                                                    <h2>₹499<span>/year</span></h2>
+                                                    <h6>Company</h6>
+                                                    <p>Automation plus enterprise- <br/>grade features.</p>
+                                                    <ul>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                        <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                                    </ul>
+                                                    <a href="#">Choose plan</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-3">
+                                            <div class="single_table">
+                                                <h2>₹199<span>/year</span></h2>
+                                                <h6>Custom</h6>
+                                                <p>Unleash the power of <br/>automation.</p>
+                                                <ul>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                    <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                </ul>
+                                                <a href="#">Choose plan</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,75 +236,6 @@
 
         <!-- Page JS -->
         <script src="assets/js/dashboards-analytics.js"></script>
-        
-        <!-- Search Tags -->
-        <script>
-            var KEYCODE_ESCAPE = 27;
-            var KEYCODE_UP = 38;
-            var KEYCODE_DOWN = 40;
-
-            $('#input1').on('focus', function() {
-                
-                $('#list1').removeClass('hide');
-                
-            }).on('blur', function() {
-                
-                $('#list1').addClass('hide');
-                $('#list1 .list-group-item.active').removeClass('active');
-                
-            }).on('keyup', function(e) {
-                
-                if (e.keyCode === KEYCODE_DOWN) {
-                    
-                    if ($('#list1.hide').length > 0) {
-                        
-                        $('#list1.hide').removeClass('hide');
-                        
-                    } else {
-                        
-                        if ($('#list1 .list-group-item.active').length > 0) {
-                            if ($('#list1 .list-group-item.active').is(':last-child')) {
-                                $('#list1 .list-group-item.active').removeClass('active');
-                                $('#list1 .list-group-item:first-child').addClass('active');
-                            } else {
-                                $('#list1 .list-group-item.active').removeClass('active').next().addClass('active');
-                            }
-                        } else {
-                            $('#list1 .list-group-item:first-child').addClass('active');
-                        }
-                        
-                    }
-                    
-                } else if (e.keyCode === KEYCODE_UP) {
-                    
-                    if ($('#list1.hide').length > 0) {
-                        
-                        $('#list1.hide').removeClass('hide');
-                        
-                    } else {
-                        
-                        if ($('#list1 .list-group-item.active').length > 0) {
-                            if ($('#list1 .list-group-item.active').is(':first-child')) {
-                                $('#list1 .list-group-item.active').removeClass('active');
-                                $('#list1 .list-group-item:last-child').addClass('active');
-                            } else {
-                                $('#list1 .list-group-item.active').removeClass('active').prev().addClass('active');
-                            }
-                        } else {
-                            $('#list1 .list-group-item:last-child').addClass('active');
-                        }
-                        
-                    }
-                    
-                } else if (e.keyCode === KEYCODE_ESCAPE) {
-                    
-                    $('#list1').addClass('hide');
-                    $('#list1 .list-group-item.active').removeClass('active');
-                    
-                }
-                
-            });
-        </script>
 
         <!-- Place this tag in your head or just before your close body tag. -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
