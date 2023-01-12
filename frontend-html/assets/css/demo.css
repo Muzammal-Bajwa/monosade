@@ -2523,3 +2523,169 @@ a.back {
   background: #0B95CC; 
   border-radius: 50px;
 }
+
+.projectCard {
+  background: #FFFFFF;
+  box-shadow: 0px 2.45875px 3.86375px rgba(0, 0, 0, 0.02);
+  border-radius: 10.5375px;
+  margin-top: 25px;
+  margin-bottom: 50px;
+}
+
+.projectCard .pr_card_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.projectCard .pr_card_header h3 {
+  margin: 0;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 140%;
+  color: #2D3748;
+}
+
+.projectCard .pr_card_header h3 p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #497174;
+}
+
+.projectCard .pr_card_header a {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 22px;
+  color: #0B95CC;
+}
+
+.projectCard .pr_card_body {
+  padding: 0px 20px;
+  margin-top: 20px;
+}
+
+.projectCard .pr_card_body .pro_card {
+  border: 1px solid #E0E1E2;
+}
+
+.setting_tabs {
+  display: inline-block;
+  margin-top: 90px;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.setting_tabs div#v-pills-tab {
+  background: #FFFFFF;
+  box-shadow: 0px 3.5px 5.5px rgba(0, 0, 0, 0.02);
+  border-radius: 15px;
+  padding: 30px 15px;
+  height: 100%;
+  gap: 15px;
+}
+
+.setting_tabs div#v-pills-tabContent {
+  display: inline-block;
+  background: #FFFFFF;
+  box-shadow: 0px 3.5px 5.5px rgba(0, 0, 0, 0.02);
+  border-radius: 15px;
+  height: 100%;
+}
+
+.setting_tabs div#v-pills-tab button.active {
+  background: #EAF8F5;
+  border-radius: 8px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  box-shadow: none;
+  text-align: left;
+  padding: 15px;
+}
+
+.setting_tabs div#v-pills-tab button {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #497174;
+  text-align: left;
+  padding: 15px;
+}
+
+.edit_profile {
+
+}
+
+.edit_profile h2 {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 23px;
+  color: #497174;
+  margin-bottom: 35px;
+}
+
+.edit_profile label.form-label {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 14px;
+  color: #000000;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.edit_profile input {
+  background: #FFFFFF;
+  border-radius: 5.64438px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 14px;
+  color: #497174;
+}
+
+.edit_profile button.btn.btn-primary {
+  background: #0B95CC;
+  border: 0.705548px solid #0B95CC;
+  border-radius: 50px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 14px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 14px 32px;
+  box-shadow: none;
+  margin-top: 20px;
+}
+
+.edit_profile span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.edit_profile span select#inputState {
+  width: 100px;
+}
