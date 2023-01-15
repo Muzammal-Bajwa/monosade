@@ -82,8 +82,8 @@
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Repeat Order</a
+                              <a class="dropdown-item" href="{{ route('projects.edit',[$currentWorkspace->slug,$project->id]) }}"
+                                ><i class="bx bx-edit-alt me-1"></i> edit project</a
                               >
                              <a href="javascript:void(0)" class="dropdown-item text-danger bs-pass-para" data-confirm="{{__('Are You Sure?')}}" data-text="{{__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="leave-form-{{$project->id}}">
                                 <i class="bx bx-trash me-1"></i> Delete Project</a>

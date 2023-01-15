@@ -34,6 +34,9 @@ use App\Http\Controllers\MolliePaymentController;
 use App\Http\Controllers\SkrillPaymentController;
 
 
+use App\Http\Controllers\uploading;
+
+
 
 
 
@@ -90,6 +93,7 @@ Route::prefix('client')->as('client.')->group(function() {
     // project
     Route::get('/{slug}/projects',[ProjectController::class, 'index'])->name('projects.index')->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/create',[ProjectController::class, 'create_project'])->name('projects.create')->middleware(['auth:client','XSS']);
+    // Route::get('/{slug}/projects/edit/{id?}',[ProjectController::class, 'edit_project'])->name('projects.edit')->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/{id}',[ProjectController::class, 'show'])->name('projects.show')->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/milestone/{id}',[ProjectController::class, 'milestone'])->name('projects.milestone')->middleware(['auth:client','XSS']);
     Route::post('/{slug}/projects/milestone/{id}/store',[ProjectController::class, 'milestoneStore'])->name('projects.milestone.store')->middleware(['auth:client','XSS']);
@@ -631,3 +635,39 @@ Route::post('/{slug}/contract_status_edit/{id}', [ContractController::class, 'co
 
   Route::post(
     '/{slug}/Notification/Delete', [UserController::class, 'delete_all_notification',])->name('delete_all.notifications');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // File Uploading by Muzammal 
+
+    Route::post(
+        'create', [UploadController::class, 'upload',]);

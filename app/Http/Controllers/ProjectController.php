@@ -189,16 +189,27 @@ class ProjectController extends Controller
         $plan = Plan::find($objUser->plan);
         $currentWorkspace = Utility::getWorkspaceBySlug($slug);
         $user = $currentWorkspace->id;
+        
         if ($plan) {
-            $totalWS = $objUser->countWorkspaceProject($currentWorkspace->id);
+            
+            $totalWS = $objUser->countWorkSpaceProject($currentWorkspace->id);
             if ($totalWS < $plan->max_projects || $plan->max_projects == -1) {
-                $request->validate(['name' => 'required']);
-
                 $post = $request->all();
-
                 $post['start_date'] = $post['end_date'] = date('Y-m-d');
                 $post['workspace'] = $currentWorkspace->id;
                 $post['created_by'] = $objUser->id;
+                $post['height'] = $request->input('height');
+                $post['width'] = $request->input('width');
+              
+                if($request->hasfile('media')){
+                    $dir = 'project/';
+                    $media_dark_Name =$currentWorkspace->id.'_'.'logo-light.png';
+                    $path = Utility::upload_file($request,'media', $media_dark_Name,$dir,[]);
+                    if($path['flag'] == 1){
+                        $post['project_media'] = $path['url'];
+                    }
+                }
+
                 $userList = [];
                 if (isset($post['users_list'])) {
                     $userList = $post['users_list'];
@@ -608,9 +619,21 @@ class ProjectController extends Controller
         $objUser = Auth::user();
         $currentWorkspace = Utility::getWorkspaceBySlug($slug);
         $project = Project::select('projects.*')->join('user_projects', 'projects.id', '=', 'user_projects.project_id')->where('user_projects.user_id', '=', $objUser->id)->where('projects.workspace', '=', $currentWorkspace->id)->where('projects.id', '=', $projectID)->first();
-        $project->update($request->all());
+        $post = $request->all();
+        $post['project_media'] = $post['media_url'];
+        if($request->hasfile('media')){
+            $dir = 'project/';
+            $media_dark_Name =$currentWorkspace->id.'_'.'logo-light.png';
+            $path = Utility::upload_file($request,'media', $media_dark_Name,$dir,[]);
+            if($path['flag'] == 1){
+                $post['project_media'] = $path['url'];
+            }
+        }
+        $project->update($post);
 
-        return redirect()->back()->with('success', __('Project Updated Successfully!'));
+        // return redirect()->back()->with('success', __('Project Updated Successfully!'));
+        return redirect()->route('projects.index', $currentWorkspace->slug)->with('success', __('Project Updated Successfully!') . ((isset($smtp_error)) ? ' <br> <span class="text-danger">' . $smtp_error . '</span>' : ''));
+
     }
 
 

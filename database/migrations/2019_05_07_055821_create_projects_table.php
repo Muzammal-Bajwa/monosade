@@ -18,6 +18,11 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->enum('status',['Ongoing','Finished','OnHold'])->default('Ongoing');
             $table->text('description')->nullable();
+            $table->varchar('project_media')->nullable();
+            $table->varchar('height')->nullable();
+            $table->varchar('width')->nullable();
+            $table->varchar('coustom_type ')->nullable();
+            $table->varchar('is_coustom')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('budget')->default(0);
