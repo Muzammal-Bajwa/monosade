@@ -51,15 +51,32 @@
 
    @include('partials.topnav')
 
-   @yield('content')
-                      
+   <div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        @yield('content')
+    </div>
    @include('partials.footer')
+   
                         <div class="content-backdrop fade"></div>
                     </div>
                     <!-- Content wrapper -->
                 </div>
                 <!-- / Layout page -->
    </div>
+
+<div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>    
+            </div>
+                <div class="body">
+                </div>
+            
+        </div>
+    </div>
+</div>
 
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
@@ -279,41 +296,41 @@
     });
   }
 
-  var custthemebg = document.querySelector("#cust-theme-bg");
-  custthemebg.addEventListener("click", function () {
-    if (custthemebg.checked) {
-      document.querySelector(".dash-sidebar").classList.add("transprent-bg");
-      document
-        .querySelector(".dash-header:not(.dash-mob-header)")
-        .classList.add("transprent-bg");
-    } else {
-      document.querySelector(".dash-sidebar").classList.remove("transprent-bg");
-      document
-        .querySelector(".dash-header:not(.dash-mob-header)")
-        .classList.remove("transprent-bg");
-    }
-  });
+//   var custthemebg = document.querySelector("#cust-theme-bg");
+//   custthemebg.addEventListener("click", function () {
+//     if (custthemebg.checked) {
+//       document.querySelector(".dash-sidebar").classList.add("transprent-bg");
+//       document
+//         .querySelector(".dash-header:not(.dash-mob-header)")
+//         .classList.add("transprent-bg");
+//     } else {
+//       document.querySelector(".dash-sidebar").classList.remove("transprent-bg");
+//       document
+//         .querySelector(".dash-header:not(.dash-mob-header)")
+//         .classList.remove("transprent-bg");
+//     }
+//   });
 
-  var custdarklayout = document.querySelector("#cust-darklayout");
-  custdarklayout.addEventListener("click", function () {
-    if (custdarklayout.checked) {
+//   var custdarklayout = document.querySelector("#cust-darklayout");
+//   custdarklayout.addEventListener("click", function () {
+//     if (custdarklayout.checked) {
      
-      document
-        .querySelector("#main-style-link")
-        .setAttribute("href", "{{ asset('assets/css/style-dark.css')}}");
-        document
-        .querySelector(".m-header > .b-brand > .logo-lg")
-        .setAttribute("src", "{{asset('assets/images/logo.svg')}}");
-    } else {
+//       document
+//         .querySelector("#main-style-link")
+//         .setAttribute("href", "{{ asset('assets/css/style-dark.css')}}");
+//         document
+//         .querySelector(".m-header > .b-brand > .logo-lg")
+//         .setAttribute("src", "{{asset('assets/images/logo.svg')}}");
+//     } else {
      
-      document
-        .querySelector("#main-style-link")
-        .setAttribute("href", "{{ asset('assets/css/style.css')}}");
-        document
-        .querySelector(".m-header > .b-brand > .logo-lg")
-        .setAttribute("src", "{{ asset('assets/images/logo-dark.svg')}}");
-    }
-  });
+//       document
+//         .querySelector("#main-style-link")
+//         .setAttribute("href", "{{ asset('assets/css/style.css')}}");
+//         document
+//         .querySelector(".m-header > .b-brand > .logo-lg")
+//         .setAttribute("src", "{{ asset('assets/images/logo-dark.svg')}}");
+//     }
+//   });
   function removeClassByPrefix(node, prefix) {
     for (let i = 0; i < node.classList.length; i++) {
       let value = node.classList[i];
