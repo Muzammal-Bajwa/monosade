@@ -266,6 +266,7 @@ Route::delete('/{slug}/users/{id}',[UserController::class, 'removeUser'])->name(
 
 
 
+Route::get('/my-account/edit',[UserController::class, 'accountEdit'])->name('users.edit.account')->middleware(['auth','XSS']);
 Route::get('/my-account',[UserController::class, 'account'])->name('users.my.account')->middleware(['auth','XSS']);
 Route::post('/{slug}/my-account/{id}/update',[UserController::class, 'update'])->name('update.account')->middleware(['auth','XSS']);
 Route::post('/my-account/password',[UserController::class, 'updatePassword'])->name('update.password')->middleware(['auth','XSS']);

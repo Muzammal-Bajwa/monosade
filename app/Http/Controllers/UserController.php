@@ -320,10 +320,35 @@ class UserController extends Controller
 
     public function account()
     {
-        $user             = Auth::user();
+        $user = Auth::user();
+        $clients = [];
+        $projects = [];
+        $currentWorkspace = Utility::getWorkspaceBySlug('');
+        if ($user->getGuard() == 'client') {
+            $projects = Project::select('projects.*')->join('client_projects', 'projects.id', '=', 'client_projects.project_id')->where('client_projects.client_id', '=', $user->id)->where('projects.workspace', '=', $currentWorkspace->id)->get();
+        } else {
+            $projects = Project::select('projects.*')->join('user_projects', 'projects.id', '=', 'user_projects.project_id')->where('user_projects.user_id', '=', $user->id)->where('projects.workspace', '=', $currentWorkspace->id)->get();
+        }
+        if ($currentWorkspace->creater->id == \Auth::user()->id) {
+            $clients = Client::select(
+                [
+                    'clients.*',
+                    'client_workspaces.is_active',
+                ]
+            )->join('client_workspaces', 'client_workspaces.client_id', '=', 'clients.id')->where('client_workspaces.workspace_id', '=', $currentWorkspace->id)->get();
+        }
+        // echo '<pre/>';
+        // print_r($projects);
+        // exit;
+        return view('users.account', compact('currentWorkspace', 'user', 'projects', 'clients'));
+    }
+
+    public function accountEdit()
+    {
+        $user = Auth::user();
         $currentWorkspace = Utility::getWorkspaceBySlug('');
 
-        return view('users.account', compact('currentWorkspace', 'user'));
+        return view('users.edit_account', compact('currentWorkspace', 'user'));
     }
 
     public function edit($slug, $id)
@@ -378,7 +403,10 @@ class UserController extends Controller
         }
 
         $objUser->name  = $request->name;
+        $objUser->last_name = $request->last_name;
         $objUser->email = $request->email;
+        $objUser->phone_code = $request->phone_code;
+        $objUser->phone_no = $request->phone_no;
          $dir = 'users-avatar/';
 
          $logo=Utility::get_file('users-avatar/');

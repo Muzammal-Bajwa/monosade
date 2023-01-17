@@ -762,7 +762,12 @@ class WorkspaceController extends Controller
                 $currentWorkspace->invoice_footer_title = $request->invoice_footer_title;
                 $currentWorkspace->invoice_footer_notes = $request->invoice_footer_notes;
             }
-
+            elseif($request->has('email_notify'))
+            {
+                $currentWorkspace->is_email_on_new_project = $request->is_email_on_new_project;
+                $currentWorkspace->is_email_on_product_updates = $request->is_email_on_product_updates;
+                $currentWorkspace->is_email_on_subscription = $request->is_email_on_subscription;
+            }
             elseif($request->currency)
             {
                 $currentWorkspace->currency          = $request->currency;

@@ -13,212 +13,147 @@
 $logo=\App\Models\Utility::get_file('users-avatar/');
 @endphp
 @section('content')
-  <div class="row">
-                    <div class="col-xl-3">
-                        <div class="card sticky-top" style="top:30px">
-                            <div class="list-group list-group-flush" id="useradd-sidenav">
-                                <a href="#v-pills-home" class="list-group-item list-group-item-action border-0">{{__('Account')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+   <!-- Content -->
 
-                                <a href="#v-pills-profile" class="list-group-item list-group-item-action border-0">{{__('Change Password')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                @auth('client')
-                                <a href="#v-pills-billing" class="list-group-item list-group-item-action border-0">{{__('Billing Details')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                                @endauth
-                                
+    <!-- Content -->
+    @php
+    $workspace = $currentWorkspace ? $currentWorkspace->id : 0 ;
+    $user_id = $user? $user->id:0;
+    @endphp
+    <div class="container-xxl flex-grow-1 container-p-y">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="profile_bg">
+                                        <div class="profile_card">
+                                            <div class="left_inner">
+                                                <div class="profile_icon">
+                                                <img @if($user->avatar) src="{{asset($logo.$user->avatar)}}" @else avatar="{{ $user->name }}" @endif id="myAvatar" alt="user-image">
+                                                    <!-- <a href="#"><i class='bx bxs-pencil'></i></a> -->
+                                                </div>
+                                                <span>
+                                                    <h3>{{$user->name}} </h3>
+                                                    <p>{{$user->email}}</p>
+                                                </span>
+                                            </div>
+                                            <div class="right_inner">
+                                                <a href="{{ route('users.edit.account') }}"><i class='bx bxs-edit' ></i> Edit Profile</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9">
-                        <div id="v-pills-home" class="card ">
-                              <div class="card-header">
-                                <h5>{{__('Avatar')}}</h5>
-                            </div>
-                            @php 
-                            $workspace = $currentWorkspace ? $currentWorkspace->id : 0 ;
-                            $user_id = $user? $user->id:0;
-                            @endphp
-                            <div class="card-body">
-                                <form method="post" action="@auth('web'){{route('update.account',[$workspace,$user_id])}}@elseauth{{route('client.update.account' ,[$workspace,$user_id])}}@endauth" enctype="multipart/form-data">
-                                    @csrf
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                     
-                                                        <img @if($user->avatar) src="{{asset($logo.$user->avatar)}}" @else avatar="{{ $user->name }}" @endif id="myAvatar" alt="user-image" class="rounded-circle img-thumbnail img_hight w-25">
-                                                        @if($user->avatar!='')
-                                                       <div class=" ">
-                                                            <a href="#" class=" action-btn btn-danger  btn btn-sm  mb-1 d-inline-flex align-items-center bs-pass-para" data-confirm="{{__('Are You Sure?')}}" data-text="{{__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="delete_avatar"><i class="ti ti-trash text-white"></i></a>
-
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="infoCard">
+                                        <div class="card-header">
+                                            <h3>Profile Information</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul>
+                                                <li>
+                                                    <label for="">Full Name</label>
+                                                    {{$user->name}}
+                                                </li>
+                                                <li>
+                                                    <label for="">Mobile</label>
+                                                    {{$user->phone_no}}  {{$user->phone_code}}
+                                                </li>
+                                                <li>
+                                                    <label for="">Email</label>
+                                                    {{$user->email}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="infoCard">
+                                        <div class="card-header">
+                                            <h3>My team</h3>
+                                            <a href="{{ route('clients.index' , [$workspace]) }}">View All</a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="teams">
+                                                @foreach ($clients as $client)
+                                                <div class="member">
+                                                    <div class="rt_side">
+                                                        <img src="assets/img/Profil.png" alt="">
+                                                        <h5>{{$client->email}}<p>{{$client->name}}</p></h5>
+                                                    </div>
+                                                    <div class="lt_side">
+                                                        <div class="dropdown">
+                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Remove</a>
                                                             </div>
-                                                        @endif
-                                                        <div class="choose-file ">
-                                                              <label for="avatar">
-                                                                <div class=" bg-primary"> <i class="ti ti-upload px-1"></i>{{__('Choose file here')}}</div>
-                                                                <input type="file" class="form-control" name="avatar" id="avatar" data-filename="avatar-logo">
-                                                            </label>
-                                                        <!--     <p class="avatar-logo"></p> -->
-                                                            @error('avatar')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                            @enderror
                                                         </div>
                                                     </div>
-                                                    <small class="">{{ __('Please upload a valid image file. Size of image should not be more than 2MB.') }}</small>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="name" class="form-label">{{ __('Full Name') }}</label>
-                                                        <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" id="fullname" placeholder="{{ __('Enter Your Name') }}" value="{{ $user->name }}" required autocomplete="name">
-                                                        @error('name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="form-label">{{ __('Email') }}</label>
-                                                        <input class="form-control @error('email') is-invalid @enderror" name="email" type="text" id="email" placeholder="{{ __('Enter Your Email Address') }}" value="{{ $user->email }}" required autocomplete="email">
-                                                        @error('email')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mt-4">
-                                                <div class=" row">
-                                                  <div class="text-end">
-                                                       <button type="submit" class="btn-submit btn btn-primary">
-                                                            {{ __('Save Changes')}}
-                                                        </button> 
-                                               <!--   <button class="btn btn-danger">Delete Account<i
-                                                class="ti ti-chevron-right ms-1 ms-sm-2"></i></button> -->
-                                                </div>
-                                 
-                                                    </div>
-                                                </div> <!-- end col -->
-                                            </div> <!-- end row -->
-                                        </form>
-                                         @if($user->avatar!='')
-                                            <form action="@auth('web'){{route('delete.avatar')}}@elseauth{{route('client.delete.avatar')}}@endauth" method="post" id="delete_avatar">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
-                                        @endif
-                                        @auth('web')
-                                        <div class="text-end">
-                                            <a href="#" class="btn btn-danger delete_btn bs-pass-para mx-5" data-confirm="{{__('Are You Sure?')}}" data-text="{{__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="delete-my-account">
-                                                {{ __('Delete')}} {{__('My Account')}}
-                                            </a>
-
-                                            <form action="{{route('delete.my.account')}}" method="post" id="delete-my-account">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                                @endforeach
+                                                
                                         </div>
-                                        @endauth
                                     </div>
-                                    <div class="card" id="v-pills-profile">
-                                          <div class="card-header">
-                                            <h5>{{__('Change Password')}}</h5>
-                                            </div>
-                                     <div class="card-body">
-                                        <form method="post" action="@auth('web'){{route('update.password')}}@elseauth{{route('client.update.password')}}@endauth">
-                                            @csrf
-                                          
-                                                <div class="col-lg-12">
-                                                      <div class="row">
-                                                    <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label for="old_password" class="form-label">{{ __('Old Password') }}</label>
-                                                        <input class="form-control @error('old_password') is-invalid @enderror" name="old_password" type="password" id="old_password"  autocomplete="old_password" placeholder="{{ __('Enter Old Password') }}">
-                                                        @error('old_password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                        @enderror
-                                                    </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label for="password" class="form-label">{{ __('New Password') }}</label>
-                                                        <input class="form-control @error('password') is-invalid @enderror" name="password" type="password" required autocomplete="new-password" id="password" placeholder="{{ __('Enter Your Password') }}">
-                                                        @error('password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label for="password_confirmation" class="form-label">{{ __('Confirm New Password') }}</label>
-                                                        <input class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" type="password" required autocomplete="new-password" id="password_confirmation" placeholder="{{ __('Enter Your Password') }}">
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="projectCard">
+                                        <div class="pr_card_header">
+                                            <h3>Projects <br/><p>Your recent projects...</p></h3>
+                                            <a href="{{ route('projects.index' , [$workspace]) }}">View All</a>
+                                        </div>
+                                        <div class="pr_card_body">
                                             <div class="row">
-                                                <div class="text-end">
-                                                    <button type="submit" class="btn-submit btn btn-primary "> {{ __('Change Password') }} </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    </div>
-                                    @auth('client')
-                                        <div class="card" id="v-pills-billing">
-
-                                            <div class="card-header">
-                                            <h5>{{__('Billing Details')}}</h5>
-                                            </div>
-                                          <div class="card-body">
-                                            <form method="post" action="{{route('client.update.billing')}}">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="form-group col-md-12">
-                                                        <label for="address" class="form-label">{{__('Address')}}</label>
-                                                        <input class="form-control font-style" name="address" type="text" value="{{ $user->address }}" id="address">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="city" class="form-label">{{__('City')}}</label>
-                                                        <input class="form-control font-style" name="city" type="text" value="{{ $user->city }}" id="city">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="state" class="form-label">{{__('State')}}</label>
-                                                        <input class="form-control font-style" name="state" type="text" value="{{ $user->state }}" id="state">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="zipcode" class="form-label">{{__('Zip/Post Code')}}</label>
-                                                        <input class="form-control" name="zipcode" type="text" value="{{ $user->zipcode }}" id="zipcode">
-                                                    </div>
-                                                    <div class="form-group  col-md-6">
-                                                        <label for="country" class="form-label">{{__('Country')}}</label>
-                                                        <input class="form-control font-style" name="country" type="text" value="{{ $user->country }}" id="country">
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="telephone" class="form-label">{{__('Telephone')}}</label>
-                                                        <input class="form-control" name="telephone" type="text" value="{{ $user->telephone }}" id="telephone">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="text-end">
-                                                        <button type="submit" class="btn-submit btn btn-primary">
-                                                            {{ __('Save Changes')}}
+                                            @foreach ($projects as $project)
+                                                <div class="col-lg-3 col-sm-6 col-12">
+                                                    <div class="pro_card">
+                                                    <div class="pr_header">
+                                                      <div class="title_pr">
+                                                        <a href="projects-details.html">
+                                                          <span><img src="assets/img/book.png" alt=""></span>
+                                                          <h3> {{$project->name}} <span>Logo Design</span></h3>
+                                                        </a>
+                                                      </div>
+                                                      <a href="#"><img src="{{asset('public/new_assets/assets/img/status.png')}}" alt=""></a>
+                                                      <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                          <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="{{ route('projects.edit',[$currentWorkspace->slug,$project->id]) }}"
+                                                                ><i class="bx bx-edit-alt me-1"></i> edit project</a
+                                                            >
+                                                            <a href="javascript:void(0)" class="dropdown-item text-danger bs-pass-para" data-confirm="{{__('Are You Sure?')}}" data-text="{{__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="leave-form-{{$project->id}}">
+                                                                <i class="bx bx-trash me-1"></i> Delete Project</a>
+                                                            <form id="leave-form-{{$project->id}}" action="{{ route('projects.leave',[$currentWorkspace->slug,$project->id]) }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
+                                                            </div>
+                                                      </div>
                                                     </div>
+                                                    <div class="pr_body">
+                                                      <p> {{$project->description}}</p>
+                                                    </div>
+                                                    <div class="pr_footer">
+                                                      <div class="files">
+                                                        <h5><i class='bx bxs-file' ></i> 5</h5>
+                                                        <h5><i class='bx bxs-message-detail' ></i> 8</h5>
+                                                      </div>
+                                                      <span class="in_progress"> {{$project->status}}</span>
+                                                    </div>
+                                                  </div>
                                                 </div>
-                                            </form>
+                                                @endforeach
+                                              </div>
                                         </div>
-                                        </div>
-                                    @endauth 
-                               </div>
-                          </div>
-@endsection
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / Content -->@endsection
 @push('scripts')
 
               <script type="text/javascript">

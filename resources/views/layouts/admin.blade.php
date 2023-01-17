@@ -120,7 +120,7 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 
-
+        <script src="{{asset('assets/custom/js/main.min.js')}}"></script>
         <script src="{{ asset('assets/custom/js/custom.js') }}"></script> 
        <script src="{{ asset('assets/js/dash.js')}}"></script>
 

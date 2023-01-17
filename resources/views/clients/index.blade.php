@@ -8,7 +8,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row mini_content">
             <div class="col-lg-6 col-md-6 col-12">
-                <h3>Team Members (8)</h3>
+                <h3>Team Members ({{@$clients->count()}})</h3>
             </div>
             @auth('web')
               @if(isset($currentWorkspace) && $currentWorkspace->creater->id == Auth::id())
