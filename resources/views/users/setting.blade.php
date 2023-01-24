@@ -65,42 +65,196 @@
 }
 </style>
 @section('content')
+<div class="row mb-5">
+    <div class="col-lg-12 col-md-12 col-12">
+        <div class="profile_bg">
+            <div class="profile_card">
+                <div class="left_inner">
+                    <div class="profile_icon">
+                        <img src="assets/img/my_profile.png" alt="">
+                        <a href="#"><i class='bx bxs-pencil'></i></a>
+                    </div>
+                    <span>
+                        <h3>{{auth()->user()->name}}</h3>
+                        <p>{{auth()->user()->email}}</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@php
+    $workspace = $currentWorkspace ? $currentWorkspace->id : 0 ;
+    auth()->user();
+@endphp
     <div class="row">
             <!-- [ sample-page ] start -->
             <div class="col-sm-12">
                 <div class="row">
-                    <div class="col-xl-3">
-                        <div class="card sticky-top" style="top:30px">
-                            <div class="list-group list-group-flush" id="useradd-sidenav">
-                                <a href="#workspace-settings" class="list-group-item list-group-item-action border-0">{{__('Workspace Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#task-stage-settings" class="list-group-item list-group-item-action border-0 ">{{__('Task Stage Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#bug-stage-settings" class="list-group-item list-group-item-action border-0">{{__('Bug Stage Settings')}}  <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#tax-settings" class="list-group-item list-group-item-action border-0">{{__('Tax Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#company-settings" class="list-group-item list-group-item-action border-0">{{__('Company Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#payment-settings" class="list-group-item list-group-item-action border-0">{{__('Payment Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#invoice-settings" class="list-group-item list-group-item-action border-0">{{__('Invoice Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a  href="#email-notification-settings" class="list-group-item list-group-item-action border-0">{{__('Email Notification Settings')}}<div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#zoom-meeting-settings" class="list-group-item list-group-item-action border-0" >{{__('Zoom Meeting Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                 @if(Auth::user()->type == 'user')
-                                <a href="#slack-settings" class="list-group-item list-group-item-action border-0">{{__('Slack Settings')}}<div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-
-                                <a href="#telegram-settings" class="list-group-item list-group-item-action border-0">{{__('Telegram Settings')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                                 @endif
+                    <div class="col-xl-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="setting_tabs">
+                                <div class="d-flex align-items-start">
+                                    <div class="nav flex-column nav-pills me-3 col-lg-2 col-12" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Profile</button>
+                                        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Notifications</button>
+                                        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Choose Plan</button>
+                                        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Password & Security</button>
+                                    </div>
+                                    <div class="tab-content col-lg-10 col-12" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active edit_profile" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                                            <h2>Edit Profile</h2>
+                                            <form class="row g-3" method="post" action="@auth('web'){{route('update.account',[$workspace,auth()->user()->id])}}@elseauth{{route('client.update.account' ,[$workspace,auth()->user()->id])}}@endauth">
+                                            @csrf   
+                                                <div class="col-md-6">
+                                                    <label for="inputEmail4" class="form-label">First Name</label>
+                                                    <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" id="fullname" value="{{ auth()->user()->name }}" required autocomplete="name">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputPassword4" class="form-label">Last Name</label>
+                                                    <input type="text" name="last_name" value="{{ auth()->user()->last_name }}" class="form-control" id="inputPassword4">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputEmail4" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" value="{{auth()->user()->email}}" id="inputEmail4">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputPassword4" class="form-label">Phone Number</label>
+                                                    <span>
+                                                    <select id="inputState" class="form-select">
+                                                        <option selected>+91</option>
+                                                        <option>+98</option>
+                                                        <option>+1</option>
+                                                    </select>
+                                                        <input type="text" class="form-control" value="{{ auth()->user()->phone_no }}" name="phone_no" id="inputPassword4">
+                                                    </span>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane fade notification" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+                                            <h2>Notifications</h2>
+                                            <form class="row g-3">
+                                                <div class="col-12">
+                                                    <span>ACCOUNT</span>
+                                                    <div class="form-check form-switch mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked1" checked="">
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked1">Email me when someone follows me</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check form-switch mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" checked="">
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked2">Email me when someone answers on my post</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check form-switch mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked3">
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked3">Email me when someone mentions me</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <span>PLATFORM</span>
+                                                    <div class="form-check form-switch mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked4">
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked4">New launches and projects</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check form-switch mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked5">
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked5">Monthly product updates</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-check form-switch mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked6" checked="">
+                                                        <label class="form-check-label" for="flexSwitchCheckChecked6">Subscribe to newsletter</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane fade plans" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
+                                            <h2>Choose Plan</h2>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-12">
+                                                    <div class="pl_card">
+                                                        <h3>₹299</h3>
+                                                        <h6>Professional</h6>
+                                                        <p>Unleash the power of automation.</p>
+                                                        <ul>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12">
+                                                    <div class="pl_card">
+                                                        <h3>₹299</h3>
+                                                        <h6>Professional</h6>
+                                                        <p>Unleash the power of automation.</p>
+                                                        <ul>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-12">
+                                                    <div class="pl_card">
+                                                        <h3>₹299</h3>
+                                                        <h6>Professional</h6>
+                                                        <p>Unleash the power of automation.</p>
+                                                        <ul>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                            <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">
+                                            <div class="tab-pane fade show active edit_profile" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                                                <h2>Edit Profile</h2>
+                                                <form class="row g-3" method="post" action="@auth('web'){{route('update.password',[$workspace,auth()->user()->id])}}@elseauth{{route('client.update.account' ,[$workspace,auth()->user()->id])}}@endauth">
+                                                    @csrf   
+                                                    <div class="col-md-6">
+                                                        <label for="inputEmail4" class="form-label">Current Password</label>
+                                                        <input class="form-control" name="old_password" type="password" id="fullname"  required autocomplete="name">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputPassword4" class="form-label">New Password</label>
+                                                        <input type="password" name="password"  class="form-control" id="inputPassword4">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputEmail4" class="form-label">Confirm Password</label>
+                                                        <input type="password" class="form-control" name="password_confirmation"  id="inputEmail4">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
-                    <div class="col-xl-9">
                        
-                        <div id="workspace-settings" class="">
+                        <!-- <div id="workspace-settings" class="">
                             {{Form::open(array('route'=>['workspace.settings.store', $currentWorkspace->slug],'method'=>'post', 'enctype' => 'multipart/form-data'))}}
                             <div class="row">
                                 <div class="col-12">
@@ -280,7 +434,7 @@
                                 </div>
                               </div> 
                                 {{Form::close()}}
-                        </div>
+                        </div> -->
                                         
                                 <div id="task-stage-settings" class="">
                                     <div class="">

@@ -32,11 +32,162 @@
 }
   </style>
 @section('content')
+
+
+
+<section id="subContent">
+  <div class="container">
+      <div class="row">
+          <div class="col-12 col-lg-12 text-center">
+              <h1>We’ve got a pricing plan<br/>
+                  <span>that’s perfect you</span></h1>
+              <p>Cost-Effective, Full Services, High Security</p>
+          </div>
+      </div>
+      <div class="row">
+        @foreach ($plans as $key => $plan)
+          <div class="col-12 col-lg-12">
+              <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">MONTHLY</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">YEARLY</button>
+                  </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                      <div class="pricing_table" style="height: 650px">
+                          <div class="row row-eq-height">
+                              <div class="col-12 col-lg-3">
+                                  <div class="single_table">
+                                      <h2>{{ $plan->name }}</h2>
+                                      @if(\Auth::user()->type == 'user' && \Auth::user()->plan == $plan->id)
+                                      <div class="d-flex flex-row-reverse m-0 p-0 ">
+                                          <span class="d-flex align-items-center ms-2">
+                                              <i class="f-10 lh-1 fas fa-circle text-success"></i>
+                                              <span class="ms-2"> {{ __('Active') }}</span>
+                                          </span>
+                                      </div>
+                                      @endif
+                                      <h6>Basic</h6>
+                                      <h3>
+                                      <span class="mb-4 f-w-600 p-price"
+                                      >{{ (env('CURRENCY_SYMBOL') ? env('CURRENCY_SYMBOL') : '$') }}{{ $plan->monthly_price }}<small class="text-sm">/{{ __('Per month') }}</small></span>
+                                      </h3>
+                                      <p>{{ $plan->description }}</p>
+                                      <ul>
+                                          <li><img src="assets/img/check-circle.png" alt="">{{ ($plan->trial_days < 0)?__('Unlimited'):$plan->trial_days }} {{__('Trial Days')}}</li>
+                                          <li><img src="assets/img/check-circle.png" alt="">{{ ($plan->max_workspaces < 0)?__('Unlimited'):$plan->max_workspaces }} {{__('Workspaces')}}</li>
+                                          <li><img src="assets/img/check-circle.png" alt="">{{ ($plan->max_users < 0)?__('Unlimited'):$plan->max_users }} {{__('Users Per Workspace')}}</li>
+                                          <li><img src="assets/img/check-circle.png" alt="">{{ ($plan->max_clients < 0)?__('Unlimited'):$plan->max_clients }} {{__('Clients Per Workspace')}}</li>
+                                          <li><img src="assets/img/check-circle.png" alt="">{{ ($plan->max_projects < 0)?__('Unlimited'):$plan->max_projects }} {{__('Projects Per Workspace')}}</li>
+                                      </ul>
+                                      <a href="#" style="margin-top: 65px;">
+                                        
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                      <div class="pricing_table">
+                          <div class="row row-eq-height">
+                              <div class="col-12 col-lg-3">
+                                  <div class="single_table">
+                                      <h2>Free</h2>
+                                      <h6>Basic</h6>
+                                      <p>Unleash the power of <br/>automation.</p>
+                                      <ul>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                      </ul>
+                                      <a href="#">Choose plan</a>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-lg-3">
+                                  <div class="single_table">
+                                      <h2>₹299<span>/year</span></h2>
+                                      <h6>Professional</h6>
+                                      <p>Advanced tools to take your <br/>work to the next level.</p>
+                                      <ul>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                      </ul>
+                                      <a href="#">Choose plan</a>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-lg-3">
+                                  <div class="single_table most_pop">
+                                      <div class="upper">
+                                          <div class="tag">MOST POPULAR</div>
+                                          <h2>₹499<span>/year</span></h2>
+                                          <h6>Company</h6>
+                                          <p>Automation plus enterprise- <br/>grade features.</p>
+                                          <ul>
+                                              <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                              <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                              <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                              <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                              <li><img src="assets/img/check-circle-white.png" alt=""> Lorem Ipsum</li>
+                                          </ul>
+                                          <a href="#">Choose plan</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-lg-3">
+                                  <div class="single_table">
+                                      <h2>₹199<span>/year</span></h2>
+                                      <h6>Custom</h6>
+                                      <p>Unleash the power of <br/>automation.</p>
+                                      <ul>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                          <li><img src="assets/img/check-circle.png" alt=""> Lorem Ipsum</li>
+                                      </ul>
+                                      <a href="#">Choose plan</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          @endforeach
+      </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="row">
   <div class="col-md-12">
       <div class="pricing-plan">
            <div class="tab-content mt-3">
-                        <div id="monthly-biling" class="tab-pane in active">
+              <div id="monthly-biling" class="tab-pane in active">
          <div class="row">
                @foreach ($plans as $key => $plan)
              <div class="col-lg-3">
@@ -60,8 +211,7 @@
                 </div>
                 @endif
                 <span class="mb-4 f-w-600 p-price"
-                  >{{ (env('CURRENCY_SYMBOL') ? env('CURRENCY_SYMBOL') : '$') }}{{ $plan->monthly_price }}<small class="text-sm">/{{ __('Per month') }}</small></span
-                >
+                  >{{ (env('CURRENCY_SYMBOL') ? env('CURRENCY_SYMBOL') : '$') }}{{ $plan->monthly_price }}<small class="text-sm">/{{ __('Per month') }}</small></span>
                 <p class="mb-0">
                    {{ $plan->description }}
                 </p>
